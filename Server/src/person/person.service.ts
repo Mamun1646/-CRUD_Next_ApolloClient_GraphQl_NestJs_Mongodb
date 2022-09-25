@@ -30,6 +30,7 @@ export class PersonService {
   }
 
   async findAll(): Promise<Person[]> {
+     
     return this.personModel.find().exec();
   }
 }

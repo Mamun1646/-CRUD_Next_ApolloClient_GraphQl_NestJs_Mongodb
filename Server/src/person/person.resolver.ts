@@ -10,6 +10,7 @@ export class PersonResolver {
 
   @Query(() => [Person])
   async getAllPerson() {
+    
     return await this.personService.findAll();
   }
 
@@ -23,6 +24,7 @@ export class PersonResolver {
     @Args('_id') _id: string,
     @Args('updatePersonDto') updatePersonDto: UpdatePersonDto,
   ) {
+    console.log(updatePersonDto);
     return this.personService.update(_id, updatePersonDto);
   }
 
@@ -32,6 +34,7 @@ export class PersonResolver {
   }
   @Mutation(() => Person)
   addPerson(@Args('createPersonDto') createPersonDto: CreatePersonDto) {
+  
     return this.personService.addPerson(createPersonDto);
   }
 

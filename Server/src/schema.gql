@@ -24,7 +24,6 @@ input UpdatePersonDto {
   name: String!
   country: String
   Description: String
-  _id: String
 }
 
 input CreatePersonDto {
