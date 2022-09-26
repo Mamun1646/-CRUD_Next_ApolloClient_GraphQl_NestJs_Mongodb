@@ -23,14 +23,24 @@ const Edit = () => {
 
   const Users = useQuery(GET_USERS);
   // eslint-disable-next-line
+  
   const user = Users.data.getAllPerson.filter((data) => data._id == id);
 
   const [name, setName] = useState(user[0].name);
   const [country, setCountry] = useState(user[0].country);
   const [Description, setDescription] = useState(user[0].Description);
+  const [photo, setPhoto] = useState(user[0].image);
+console.log("????????????",photo)
 
   const editName = (e) => {
     setName(e.target.value);
+    // const edited_name = name;
+    // user[0].name = edited_name;
+  };
+  const editImage = (e) => {
+    //  console.log(image,"<<<<<<<<<<<<<<<<<<<<<")
+      setPhoto(e.target.files[0]);
+      console.log("   tattatfatfttat =========>>>>>>>>>>>>>>>>> target",photo)
     // const edited_name = name;
     // user[0].name = edited_name;
   };
@@ -55,11 +65,12 @@ const Edit = () => {
           name,
           country,
           Description,
+          image,
         },
       },
     });
 
-    // event.preventDefault();
+  event.preventDefault();
     alert("User info Successfully updated");
   };
 
@@ -76,7 +87,7 @@ const Edit = () => {
           <Form.Control
             type="text"
             name="name"
-            value={name}
+             value={name}
             onChange={editName}
             placeholder="Enter Name"
           />
@@ -86,7 +97,7 @@ const Edit = () => {
           <Form.Control
             type="text"
             name="country"
-            // value={position}
+             value={country}
             onChange={editCountry}
             placeholder={user[0].country}
           />
@@ -96,15 +107,24 @@ const Edit = () => {
           <Form.Control
             type="text"
             name="Description"
-            value={Description}
+             value={Description}
             onChange={editDescription}
             placeholder={user[0].Description}
           />
         </Form.Group>
-
+ <Form.Group>
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            type="file"
+            name="image"
+           
+            onChange={editImage}
+            placeholder={user[0].image}
+          />
+        </Form.Group>
         <Button
           variant="primary"
-          onClick={() => router.push("/")}
+          // onClick={() => router.push("/")}
           type="submit"
         >
           Edit User

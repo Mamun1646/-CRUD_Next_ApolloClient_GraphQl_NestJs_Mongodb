@@ -11,39 +11,50 @@ const UserForm = () => {
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
   const [Description, setDescription] = useState("");
+  const [image, setImage] = useState("");
 
   const createName = (e) => {
     setName(e.target.value);
   };
 
   const createCountry = (e) => {
+    console.log(e.target.value)
     setCountry(e.target.value);
   };
+  const createImage = (e) => {
+    setImage(e.target.files[0]);
+    console.log(e.target.files[0])
+   
+   
+  };
+
   const createDescription = (e) => {
     setDescription(e.target.value);
   };
 
   const handleSubmit = (event) => {
+    console.log("========")
     addPerson({
       variables: {
         createPersonDto: {
           name,
           country,
           Description,
+          image
         },
       },
     });
-
+console.log("=======================")
     event.preventDefault();
   };
 
   return (
     <div className={style.create}>
-    <h2>Enter Your Bio</h2>
+      <h2>Enter Your Bio</h2>
 
       <Form onSubmit={handleSubmit}>
         <Form.Group>
-          <Form.Label>Name  </Form.Label>
+          <Form.Label>Name </Form.Label>
           <Form.Control
             type="text"
             name="name"
@@ -73,10 +84,23 @@ const UserForm = () => {
           />
         </Form.Group>
         <Form.Group>
-                  <Button className="action_btn_create" variant="primary" onClick={() => router.push("/")} type="submit">
+          <Form.Group>
+            <Form.Label>Profile Picture</Form.Label>
+            <Form.Control
+              type="file"
+              name="image"
+          
+              onChange={createImage}
+              placeholder="Choose Image"
+            />
+          </Form.Group>
+          <Form.Group></Form.Group>
+         
+          <Button className="action_btn_create"
+          //  onClick={() => router.push("/")}
+             variant="primary" onClick={handleSubmit}>
             Create User
           </Button>
-
           <Button
             className={style.action_btn}
             onClick={() => router.push("/")}

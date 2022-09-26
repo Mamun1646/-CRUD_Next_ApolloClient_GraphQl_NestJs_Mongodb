@@ -7,6 +7,7 @@ export const GET_USERS = gql`
     name
     country
     Description
+    image
   }
   }
 `;
@@ -17,41 +18,33 @@ query GetPersonById($id: String!) {
     name
     country
     Description
+    image
   }
 }
 `;
 
 
 
-export const UPDATE_USER_MUTATION = gql`
-  mutation UpdatePerson($id: String!, $updatePersonDto: UpdatePersonDto!) {
-    updatePerson(_id: $id, updatePersonDto: $updatePersonDto) {
-      
-      name
-      country
-      Description
-    }
-  }`
 
 
 
-
-export const CREATE_USER_MUTATION =gql`mutation AddPerson($createPersonDto: CreatePersonDto!) {
+export const CREATE_USER_MUTATION = gql`
+  mutation AddPerson($createPersonDto: CreatePersonDto!) {
   addPerson(createPersonDto: $createPersonDto) {
+    _id
     name
     country
     Description
-    
+    image
   }
 }`
 
 
 
-// export const EDIT_USER = gql`
-//   mutation($id: Int, $name: String, $email: String, $job_title: String) {
-//     updateUserInfo (id: $id, name: $name, email: $email, job_title: $job_title)
-//   }
-// `;
+
+
+
+
 
 export const DELETE_USER = gql`
   mutation DeletePerson($id: String!) {
@@ -60,5 +53,17 @@ export const DELETE_USER = gql`
       name
       country
       Description
+      image
     }
   }`
+
+
+export const UPDATE_USER_MUTATION = gql`mutation UpdatePerson($id: String!, $updatePersonDto: UpdatePersonDto!) {
+  updatePerson(_id: $id, updatePersonDto: $updatePersonDto) {
+    _id
+    name
+    country
+    Description
+    image
+  }
+}`

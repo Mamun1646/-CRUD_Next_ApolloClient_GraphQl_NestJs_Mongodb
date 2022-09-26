@@ -17,6 +17,9 @@ export class Person {
   @Field()
   @Prop()
   Description: string;
+  @Field(() => String, { nullable: true })
+  @Prop({ type: String })
+  image?: string;
 }
 
 export const PersonSchema = SchemaFactory.createForClass(Person);

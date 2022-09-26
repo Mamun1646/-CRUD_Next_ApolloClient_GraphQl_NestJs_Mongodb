@@ -30,6 +30,7 @@ const Home = () => {
             <th>Name</th>
             <th>Country</th>
             <th>Description</th>
+            <th>Image</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -40,6 +41,13 @@ const Home = () => {
               <td>{user.name}</td>
               <td>{user.country}</td>
               <td>{user.Description}</td>
+              <td>
+                <img
+                  className="view_image"
+                  src={user.image}
+                  alt="Card image cap"
+                />
+              </td>
               <td>
                 <Link href={`/Read/${user._id}`}>
                   <Button className="action__btn" variant="success">
