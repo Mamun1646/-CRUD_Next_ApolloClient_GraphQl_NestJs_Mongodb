@@ -29,7 +29,7 @@ export class PersonService {
     const baseUrl = process.env.BASE_URL;
     const port = process.env.PORT;
     savePath = `${baseUrl}${port}\\${newFilename}`;
-    console.log("+================", savePath);
+    console.log('+================', savePath);
     return await this.personModel.create({
       name,
       country,
@@ -50,6 +50,14 @@ export class PersonService {
 
   async getPersonById(_id: string): Promise<Person> {
     return this.personModel.findById(_id).exec();
+  }
+
+  // searching
+
+  async findPersonByName(data: string): Promise<Person[]> {
+    return await this.personModel
+      .find({ $text: { $search: data } }, { score: { $meta: 'textScore' } })
+      .sort({ score: { $meta: 'textScore' } });
   }
 
   async findAll(): Promise<Person[]> {

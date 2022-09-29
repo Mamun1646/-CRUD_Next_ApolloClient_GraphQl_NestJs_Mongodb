@@ -4,7 +4,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { Button, Form } from "react-bootstrap";
 import { CREATE_USER_MUTATION } from "../../components/graphql/index";
 import { useRouter } from "next/router";
-import style from '../../styles/Create.module.css'
+import style from "../../styles/Create.module.css";
 const UserForm = () => {
   const router = useRouter();
   const [addPerson] = useMutation(CREATE_USER_MUTATION);
@@ -18,14 +18,12 @@ const UserForm = () => {
   };
 
   const createCountry = (e) => {
-    console.log(e.target.value)
+    console.log(e.target.value);
     setCountry(e.target.value);
   };
   const createImage = (e) => {
     setImage(e.target.files[0]);
-    console.log(e.target.files[0])
-   
-   
+    console.log(setImage);
   };
 
   const createDescription = (e) => {
@@ -33,26 +31,25 @@ const UserForm = () => {
   };
 
   const handleSubmit = (event) => {
-    console.log("========")
+    event.preventDefault();
     addPerson({
       variables: {
         createPersonDto: {
           name,
           country,
           Description,
-          image
+          image,
         },
       },
     });
-console.log("=======================")
-    event.preventDefault();
+ router.push("/")
   };
 
   return (
     <div className={style.create}>
       <h2>Enter Your Bio</h2>
 
-      <Form onSubmit={handleSubmit}>
+      <Form>
         <Form.Group>
           <Form.Label>Name </Form.Label>
           <Form.Control
@@ -88,17 +85,18 @@ console.log("=======================")
             <Form.Label>Profile Picture</Form.Label>
             <Form.Control
               type="file"
-              name="image"
-          
               onChange={createImage}
               placeholder="Choose Image"
             />
           </Form.Group>
           <Form.Group></Form.Group>
-         
-          <Button className="action_btn_create"
-          //  onClick={() => router.push("/")}
-             variant="primary" onClick={handleSubmit}>
+
+          <Button
+            className="action_btn_create"
+            //  onClick={() => router.push("/")}
+            variant="primary"
+            onClick={handleSubmit}
+          >
             Create User
           </Button>
           <Button

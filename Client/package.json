@@ -12,6 +12,8 @@
     "@apollo/client": "^3.6.9",
     "@apollo/react-hooks": "^4.0.0",
     "apollo-boost": "^0.4.9",
+    "apollo-upload-client": "^17.0.0",
+    "axios": "^0.27.2",
     "bootstrap": "^5.2.1",
     "graphql": "^16.6.0",
     "next": "12.3.1",
