@@ -42,7 +42,7 @@ const UserForm = () => {
         },
       },
     });
- router.push("/")
+    router.push("/");
   };
 
   return (
