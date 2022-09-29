@@ -10,18 +10,14 @@ all users.Its a basic operaiton and this operation use every resposnsive project
 - Update
 - Delete
 - Read
+- Image Upload
+- Live Search
+- Pagination
 
 
 
     
-## Installation
 
-   Command : 
-  ```bash
- npm install
-```
-   Check All Dependecies in Pakege.js
-   
     
  
 ## Documentation
@@ -61,18 +57,40 @@ Go to the project directory
   cd CRUD_Next_ApolloClient_GraphQl_NestJs_Mongodb
 ```
 
+
+## Steps for Start the Client
+ 
+ 
+ Enter into the Client App
+```bash
+  cd Client
+```
+
+Install dependencies
+```bash
+  npm install
+```
+
+Client Start Command
+
+```bash
+  yarn dev
+```
+
+## Steps for Start the Server
+
+Enter into the Server App
+```bash
+  cd Server
+```
+
 Install dependencies
 
 ```bash
   npm install
 ```
 
-Start the server
-
-```bash
-  yarn dev
-```
-Start the Client
+Server Start Command 
 
 ```bash
  npm run start:dev
