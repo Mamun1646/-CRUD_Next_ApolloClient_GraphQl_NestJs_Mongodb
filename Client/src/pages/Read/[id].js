@@ -11,7 +11,7 @@ export default function Read() {
   const Users = useQuery(GET_USERS);
   // eslint-disable-next-line
   const user = Users.data.getAllPerson.filter((data) => data._id == id);
-  
+
   return (
     <div>
       <div className="card" style={{ width: "18rem" }}>

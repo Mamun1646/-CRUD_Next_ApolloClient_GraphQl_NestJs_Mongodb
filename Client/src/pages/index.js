@@ -5,27 +5,27 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import Posts from "../components/Posts";
+import Persons from "../components/Persons";
 import Pagination from "../components/Pagination";
 
 const Home = () => {
   //Pagination Code start
 
-  const [posts, setPosts] = useState([]);
+  const [persons, setPersons] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(3);
+  const [personsPerPage] = useState(3);
 
   const getAllUsers = useQuery(GET_USERS);
   useEffect(() => {
     if (!!getAllUsers.data) {
-      setPosts(getAllUsers.data.getAllPerson);
+      setPersons(getAllUsers.data.getAllPerson);
     }
   }, [getAllUsers]);
 
-  // Get current posts
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  // Get current persons
+  const indexOfLastPerson = currentPage * personsPerPage;
+  const indexOfFirstPerson = indexOfLastPerson - personsPerPage;
+  const currentPersons = persons.slice(indexOfFirstPerson, indexOfLastPerson);
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -85,13 +85,6 @@ const Home = () => {
             <span className="navbar-toggler-icon" />
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Button variant="primary" onClick={() => router.push("/")}>
-                  HomePage
-                </Button>
-              </li>
-            </ul>
             <form className="d-flex">
               <input
                 className="form-control me-2"
@@ -110,26 +103,6 @@ const Home = () => {
           </div>
         </div>
       </nav>
-      {/* 
-      <Button variant="primary" onClick={() => router.push("Create/Create")}>
-        Create Person
-      </Button>
-      <div className="input-group">
-        <div className="form-outline">
-          <input
-            type="text"
-            onChange={createSearch}
-            id="form1"
-            className="form-control"
-          />
-          <label className="form-label" htmlFor="form1">
-            Search
-          </label>
-        </div>
-        <button type="button" className="btn btn-primary">
-          <i className="fas fa-search" />
-        </button>
-      </div> */}
 
       {searchedPerson.length ? (
         <Table striped bordered hover>
@@ -183,56 +156,15 @@ const Home = () => {
       ) : (
         //Pagination Code start
         <div className="container mt-5">
-          <Posts posts={currentPosts} />
+          <Persons persons={currentPersons} />
           <Pagination
-            postsPerPage={postsPerPage}
-            totalPosts={posts.length}
+            personsPerPage={personsPerPage}
+            totalPersons={persons.length}
             paginate={paginate}
           />
         </div>
 
         //Pagination code end here
-
-        // <Table striped bordered hover>
-        //   <thead>
-        //     <tr>
-        //       <th>ID</th>
-        //       <th>Name</th>
-        //       <th>Country</th>
-        //       <th>Description</th>
-        //       <th>Action</th>
-        //     </tr>
-        //   </thead>
-        //   <tbody>
-        //     {datas.map((user) => (
-        //       <tr key={user._id}>
-        //         <td>{user._id}</td>
-        //         <td>{user.name}</td>
-        //         <td>{user.country}</td>
-        //         <td>{user.Description}</td>
-        //         <td>
-        //           <Link href={`/Read/${user._id}`}>
-        //             <Button className="action__btn" variant="success">
-        //               Read
-        //             </Button>
-        //           </Link>
-
-        //           <Link href={`/Edit/${user._id}`}>
-        //             <Button className="action__btn" variant="info">
-        //               Edit
-        //             </Button>
-        //           </Link>
-
-        //           <Link href={`/Delete/${user._id}`}>
-        //             <Button className="action__btn" variant="danger">
-        //               Delete
-        //             </Button>
-        //           </Link>
-        //         </td>
-        //       </tr>
-        //     ))}
-        //   </tbody>
-        // </Table>
       )}
     </div>
   );

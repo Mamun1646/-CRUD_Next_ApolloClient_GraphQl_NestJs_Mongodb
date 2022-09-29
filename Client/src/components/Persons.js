@@ -1,8 +1,7 @@
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Link from "next/link";
-const Posts = ({ posts }) => {
-
+const Persons = ({ persons }) => {
   return (
     <Table striped bordered hover>
       <thead>
@@ -16,7 +15,7 @@ const Posts = ({ posts }) => {
         </tr>
       </thead>
       <tbody>
-        {posts.map((user) => (
+        {persons.map((user) => (
           <tr key={user._id}>
             <td>{user._id}</td>
             <td>{user.name}</td>
@@ -56,4 +55,4 @@ const Posts = ({ posts }) => {
   );
 };
 
-export default Posts;
+export default Persons;

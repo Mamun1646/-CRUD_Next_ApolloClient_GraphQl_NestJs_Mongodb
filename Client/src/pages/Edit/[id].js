@@ -25,35 +25,23 @@ const Edit = () => {
   const [Description, setDescription] = useState(user[0].Description);
   const [image, setImage] = useState(user[0].image);
 
-  console.log("????????????",user[0].image)
-
   const editName = (e) => {
     setName(e.target.value);
-    // const edited_name = name;
-    // user[0].name = edited_name;
   };
   const editImage = (e) => {
-    //  console.log(image,"<<<<<<<<<<<<<<<<<<<<<")
     setImage(e.target.files[0]);
-
-    // const edited_name = name;
-    // user[0].name = edited_name;
   };
 
   const editCountry = (e) => {
     setCountry(e.target.value);
-    // const edited_country = country;
-    // user[0].country = edited_country;
   };
 
   const editDescription = (e) => {
     setDescription(e.target.value);
-    // const edited_Description = Description;
-    // user[0].Description = edited_Description;
   };
 
   const HandleSubmit = (event) => {
-      event.preventDefault();
+    event.preventDefault();
     updatePerson({
       variables: {
         id: id,
@@ -65,8 +53,7 @@ const Edit = () => {
         },
       },
     });
- router.push("/")
-  
+    router.push("/");
   };
 
   return (
