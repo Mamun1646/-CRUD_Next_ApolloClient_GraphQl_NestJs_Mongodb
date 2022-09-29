@@ -20,6 +20,11 @@ export class PersonResolver {
     return await this.personService.getPersonById(_id);
   }
 
+  @Query(() => [Person])
+  async getPersonByName(@Args('data') data: string): Promise<Person[]> {
+    return await this.personService.findPersonByName(data);
+  }
+
   @Mutation(() => Person)
   async updatePerson(
     @Args('_id') _id: string,
@@ -40,7 +45,7 @@ export class PersonResolver {
     const baseUrl = process.env.BASE_URL;
     const port = process.env.PORT;
     savePath = `${baseUrl}${port}\\${newFilename}`;
-     console.log('+================', savePath);
+    console.log('+================', savePath);
     return await this.personService.update(_id, {
       name,
       country,

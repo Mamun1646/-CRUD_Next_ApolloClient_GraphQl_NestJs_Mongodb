@@ -11,17 +11,16 @@ export default function Read() {
   const Users = useQuery(GET_USERS);
   // eslint-disable-next-line
   const user = Users.data.getAllPerson.filter((data) => data._id == id);
-  console.log(user[0].image);
+  
   return (
     <div>
       <div className="card" style={{ width: "18rem" }}>
-       
-          <img
-            className={ style.image_card}
-            src={user[0].image}
-            alt="Card image cap"
-          />
-      
+        <img
+          className={style.image_card}
+          src={user[0].image}
+          alt="Card image cap"
+        />
+
         <div className="card-body">
           <h5 className="card-title"> {user[0].name}</h5>
           <h6 className="card-title"> Country :{user[0].country}</h6>

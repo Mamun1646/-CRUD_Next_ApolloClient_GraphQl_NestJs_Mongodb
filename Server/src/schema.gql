@@ -13,6 +13,7 @@ type Person {
 type Query {
   getAllPerson: [Person!]!
   getPersonById(_id: String!): Person!
+  getPersonByName(data: String!): [Person!]!
 }
 
 type Mutation {

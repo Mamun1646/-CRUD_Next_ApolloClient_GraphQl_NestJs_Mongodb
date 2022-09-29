@@ -1,27 +1,43 @@
-* {
-  margin: 20px;
+*{
+  margin:20px;
 }
+
 
 /* Action CSS */
 
 .action__btn {
-  margin: 0 5px;
+    margin: 0 5px;
 }
 
 .create__btn {
-  margin: 10px 0;
+    margin: 10px 0;
+}
+
+.page-item{
+  margin: 5px;
+}
+.page-link{
+  margin:5px;
+ 
 }
 
 h2 {
-  text-align: center;
-  margin-top: 25px;
+
+text-align: center;
+margin-top: 25px;
+
 }
 
+.pagination {
+  text-align: center;
+  list-style: inside;
+}
 /* Read CSS */
 
+
 .view_image{
-  width: 15%;
-  height: 10%;
+  width: 75px;
+  height: 75px;
   margin:0px;
   padding:0px;
   border:0px;

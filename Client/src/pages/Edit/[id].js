@@ -8,12 +8,7 @@ import {
   UPDATE_USER_MUTATION,
 } from "../../components/graphql/index";
 
-import style from '../../styles/Edit.module.css'
-
-
-
-
-
+import style from "../../styles/Edit.module.css";
 
 const Edit = () => {
   const router = useRouter();
@@ -23,14 +18,14 @@ const Edit = () => {
 
   const Users = useQuery(GET_USERS);
   // eslint-disable-next-line
-  
-  const user = Users.data.getAllPerson.filter((data) => data._id == id);
 
+  const user = Users.data.getAllPerson.filter((data) => data._id == id);
   const [name, setName] = useState(user[0].name);
   const [country, setCountry] = useState(user[0].country);
   const [Description, setDescription] = useState(user[0].Description);
-  const [photo, setPhoto] = useState(user[0].image);
-console.log("????????????",photo)
+  const [image, setImage] = useState(user[0].image);
+
+  console.log("????????????",user[0].image)
 
   const editName = (e) => {
     setName(e.target.value);
@@ -39,8 +34,8 @@ console.log("????????????",photo)
   };
   const editImage = (e) => {
     //  console.log(image,"<<<<<<<<<<<<<<<<<<<<<")
-      setPhoto(e.target.files[0]);
-      console.log("   tattatfatfttat =========>>>>>>>>>>>>>>>>> target",photo)
+    setImage(e.target.files[0]);
+
     // const edited_name = name;
     // user[0].name = edited_name;
   };
@@ -58,6 +53,7 @@ console.log("????????????",photo)
   };
 
   const HandleSubmit = (event) => {
+      event.preventDefault();
     updatePerson({
       variables: {
         id: id,
@@ -69,9 +65,8 @@ console.log("????????????",photo)
         },
       },
     });
-
-  event.preventDefault();
-    alert("User info Successfully updated");
+ router.push("/")
+  
   };
 
   return (
@@ -87,7 +82,7 @@ console.log("????????????",photo)
           <Form.Control
             type="text"
             name="name"
-             value={name}
+            value={name}
             onChange={editName}
             placeholder="Enter Name"
           />
@@ -97,7 +92,7 @@ console.log("????????????",photo)
           <Form.Control
             type="text"
             name="country"
-             value={country}
+            value={country}
             onChange={editCountry}
             placeholder={user[0].country}
           />
@@ -107,17 +102,16 @@ console.log("????????????",photo)
           <Form.Control
             type="text"
             name="Description"
-             value={Description}
+            value={Description}
             onChange={editDescription}
             placeholder={user[0].Description}
           />
         </Form.Group>
- <Form.Group>
-          <Form.Label>Description</Form.Label>
+        <Form.Group>
+          <Form.Label>Profile Image</Form.Label>
           <Form.Control
             type="file"
             name="image"
-           
             onChange={editImage}
             placeholder={user[0].image}
           />
@@ -131,7 +125,7 @@ console.log("????????????",photo)
         </Button>
 
         <Button
-        className={style.action_btn}
+          className={style.action_btn}
           onClick={() => router.push("/")}
           variant="info"
         >
