@@ -1,17 +1,43 @@
 import { Model, UpdateQuery } from 'mongoose';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Person, PersonDocument } from './Enitity/person.entity';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/updete-person-dto';
 import { join } from 'path';
 import { createWriteStream } from 'fs';
-
+import { createHash } from 'crypto';
 @Injectable()
 export class PersonService {
   constructor(
     @InjectModel(Person.name) private personModel: Model<PersonDocument>,
   ) {}
+  async addEmail(createPersonDto:CreatePersonDto){
+    
+   
+   
+    try{
+      const currentDate=new Date()
+      const createdAt=`${currentDate.getFullYear()}${currentDate.getMonth()}${currentDate.getDay()}${currentDate.getHours()}`;
+      
+      const processedValueForHashing = `${createPersonDto.email}${createdAt}${createPersonDto.status}`;
+  
+      // Hash the combined string
+      const hashKey = createHash('sha256').update(processedValueForHashing).digest('hex');
+  
+      // Set the hashed field in the userDto
+      createPersonDto.hashKey= processedValueForHashing;
+    
+      return await this.personModel.create(createPersonDto)
+    }
+    catch(e){
+      throw new HttpException(
+        'Email already exists',
+      409,
+      );
+    }
+ 
+  }
 
   async addPerson(createPersonDto: CreatePersonDto): Promise<Person> {
     const { name, country, Description, image } = createPersonDto;

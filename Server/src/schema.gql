@@ -7,6 +7,8 @@ type Person {
   name: String!
   country: String!
   Description: String!
+  email: String!
+  status: String
   image: String
 }
 
@@ -20,12 +22,16 @@ type Mutation {
   updatePerson(_id: String!, updatePersonDto: UpdatePersonDto!): Person!
   deletePerson(_id: String!): Person!
   addPerson(createPersonDto: CreatePersonDto!): Person!
+  addEmail(createPersonDto: CreatePersonDto!): Person!
 }
 
 input UpdatePersonDto {
   name: String
   country: String
   Description: String
+  email: String
+  status: String
+  hashKey: String
   image: Upload
 }
 
@@ -33,8 +39,11 @@ input UpdatePersonDto {
 scalar Upload
 
 input CreatePersonDto {
-  name: String!
+  name: String
   country: String
   Description: String
+  email: String
+  status: String
+  hashKey: String
   image: Upload
 }

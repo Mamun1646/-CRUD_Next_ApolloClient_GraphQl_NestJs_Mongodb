@@ -62,4 +62,10 @@ export class PersonResolver {
   addPerson(@Args('createPersonDto') createPersonDto: CreatePersonDto) {
     return this.personService.addPerson(createPersonDto);
   }
+  @Mutation(() => Person)
+  addEmail(@Args('createPersonDto') createPersonDto: CreatePersonDto) {
+    //  this.personService.addEmail(createPersonDto);
+    //  this.personService.addEmail(createPersonDto);
+    return this.personService.addEmail(createPersonDto);
+  }
 }

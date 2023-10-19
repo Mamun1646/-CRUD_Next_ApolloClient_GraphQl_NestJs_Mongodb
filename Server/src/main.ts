@@ -6,6 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
    app.enableCors({ origin: '*' });
    app.use(graphqlUploadExpress());
-  await app.listen(3005);
+   console.log("http://localhost:3000/graphql")
+  await app.listen(3000);
 }
 bootstrap();

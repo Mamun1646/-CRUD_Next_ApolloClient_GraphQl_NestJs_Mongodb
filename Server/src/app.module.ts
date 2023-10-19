@@ -15,9 +15,7 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'upload'),
-    }),
+   
     PersonModule,
     GraphQLModule.forRoot({
       driver: ApolloDriver,
@@ -25,7 +23,7 @@ import { ConfigModule } from '@nestjs/config';
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
-    MongooseModule.forRoot('mongodb://localhost/nest'),
+    MongooseModule.forRoot('mongodb://localhost/testing-db'),
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,13 +1,13 @@
 /* eslint-disable */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { Button, Form } from "react-bootstrap";
-import { CREATE_USER_MUTATION } from "../../components/graphql/index";
+import { CREATE_EMAIL } from "../../components/graphql/index";
 import { useRouter } from "next/router";
 import style from "../../styles/Create.module.css";
 const UserForm = () => {
   const router = useRouter();
-  const [addPerson] = useMutation(CREATE_USER_MUTATION);
+  const [addPerson] = useMutation(CREATE_EMAIL);
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
   const [Description, setDescription] = useState("");
@@ -31,20 +31,28 @@ const UserForm = () => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    //event.preventDefault();
     addPerson({
       variables: {
         createPersonDto: {
-          name,
-          country,
-          Description,
-          image,
+          name:"Mamun",
+          email:"123458@gmail.com",
+          status:"active",
+
+         
         },
       },
+    }).then(()=>{
+      console.log("successfull")
+    }).catch((error)=>{
+      console.log(error.message)
     });
-    router.push("/");
+    //router.push("/");
   };
 
+  useEffect(()=>{
+    handleSubmit()
+  })
   return (
     <div className={style.create}>
       <h2>Enter Your Bio</h2>

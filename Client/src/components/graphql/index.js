@@ -44,6 +44,13 @@ export const CREATE_USER_MUTATION = gql`
     }
   }
 `;
+export const CREATE_EMAIL=gql`mutation AddEmail($createPersonDto: CreatePersonDto!) {
+  addEmail(createPersonDto: $createPersonDto) {
+    email
+    name
+    
+  }
+}`
 
 // export const EDIT_USER = gql`
 //   mutation($id: Int, $name: String, $email: String, $job_title: String) {

@@ -4,7 +4,7 @@ import { Document } from 'mongoose';
 
 export type PersonDocument = Person & Document;
 @ObjectType()
-@Schema()
+@Schema({timestamps:true})
 export class Person {
   @Field()
   _id: string;
@@ -17,9 +17,20 @@ export class Person {
   @Field()
   @Prop()
   Description: string;
+  @Field()
+  @Prop()
+  email: string;
+    
+  @Field(() => String, { nullable: true })
+  @Prop()
+  status: string;
+  @Prop()
+  hashKey: string;
+  
   @Field(() => String, { nullable: true })
   @Prop({ type: String })
   image?: string;
 }
 
 export const PersonSchema = SchemaFactory.createForClass(Person);
+PersonSchema.index({ email: 1 }, { unique: true });
