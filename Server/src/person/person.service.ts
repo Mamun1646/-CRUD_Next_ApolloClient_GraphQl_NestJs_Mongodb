@@ -1,12 +1,14 @@
-import { Model, UpdateQuery } from 'mongoose';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { Mutex } from 'async-mutex';
+import { createHash } from 'crypto';
+import { createWriteStream } from 'fs';
+import { Model, UpdateQuery } from 'mongoose';
+import { join } from 'path';
 import { Person, PersonDocument } from './Enitity/person.entity';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/updete-person-dto';
-import { join } from 'path';
-import { createWriteStream } from 'fs';
-import { createHash } from 'crypto';
+const mutex =new Mutex()
 @Injectable()
 export class PersonService {
   constructor(
@@ -38,6 +40,42 @@ export class PersonService {
     }
  
   }
+
+
+  async addAddPersonUsingAsyncMutex(createPersonDto: CreatePersonDto) {
+    const release = await mutex.acquire();
+    try {
+      const user = await this.personModel.findOne({ email: createPersonDto.email })
+      if (!user) {
+        console.log("Created Successfully")
+        const user = await this.personModel.create(createPersonDto)
+        return {
+          ...user,
+          message: "Successfully Created"
+        }
+      }
+      else {
+        return { message: "Email Already Exists" }
+      }
+
+
+    }
+    catch (e) {
+      console.log("Error")
+      throw new HttpException(
+        'Email already exists',
+        409,
+      );
+    }
+    finally {
+      console.log("Released")
+      release()
+    }
+ 
+  }
+
+
+
 
   async addPerson(createPersonDto: CreatePersonDto): Promise<Person> {
     const { name, country, Description, image } = createPersonDto;

@@ -68,4 +68,14 @@ export class PersonResolver {
     //  this.personService.addEmail(createPersonDto);
     return this.personService.addEmail(createPersonDto);
   }
+  @Mutation(() => Person)
+  addAddPersonUsingAsyncMutex(@Args('createPersonDto') createPersonDto: CreatePersonDto) {
+    this.personService.addAddPersonUsingAsyncMutex(createPersonDto);
+    this.personService.addAddPersonUsingAsyncMutex(createPersonDto);
+    this.personService.addAddPersonUsingAsyncMutex(createPersonDto);
+    this.personService.addAddPersonUsingAsyncMutex(createPersonDto);
+    this.personService.addAddPersonUsingAsyncMutex(createPersonDto);
+    this.personService.addAddPersonUsingAsyncMutex(createPersonDto);
+    return this.personService.addAddPersonUsingAsyncMutex(createPersonDto);
+  }
 }

@@ -3,13 +3,14 @@
 # ------------------------------------------------------
 
 type Person {
-  _id: String!
-  name: String!
-  country: String!
-  Description: String!
-  email: String!
+  _id: String
+  name: String
+  country: String
+  Description: String
+  email: String
   status: String
   image: String
+  message: String
 }
 
 type Query {
@@ -23,6 +24,7 @@ type Mutation {
   deletePerson(_id: String!): Person!
   addPerson(createPersonDto: CreatePersonDto!): Person!
   addEmail(createPersonDto: CreatePersonDto!): Person!
+  addAddPersonUsingAsyncMutex(createPersonDto: CreatePersonDto!): Person!
 }
 
 input UpdatePersonDto {
